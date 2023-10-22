@@ -81,7 +81,7 @@ resource "aws_security_group" "wordpress_rds" {
     from_port       = var.db_port
     to_port         = var.db_port
     protocol        = "tcp"
-    security_groups = [aws_security_group.wordpress_ec2.id]
+    security_groups = [aws_security_group.wordpress_ec2_sg.id]
   }
   lifecycle {
     create_before_destroy = true
