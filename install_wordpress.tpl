@@ -15,7 +15,19 @@ wp_title=${wp_title}
 sudo yum update -y
 sudo yum install -y httpd mysql
 sudo systemctl start httpd
-sudo systemctl enable httpd
+
+# Caminho para o arquivo de configuração do Apache
+arquivo_configuracao="/etc/httpd/conf/httpd.conf"
+
+# Define o valor do KeepAliveTimeout
+novo_valor="KeepAliveTimeout 65"
+
+# Adiciona o novo valor ao arquivo de configuração
+echo "$novo_valor" | sudo tee -a "$arquivo_configuracao" > /dev/null
+
+# Reinicia o serviço do Apache para aplicar as alterações
+systemctl restart httpd
+
 
 sudo amazon-linux-extras install -y php7.4
 sudo amazon-linux-extras enable php7.4
